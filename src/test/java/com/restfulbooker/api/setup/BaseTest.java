@@ -19,7 +19,7 @@ public class BaseTest {
 
     @BeforeAll
     public static void setup() {
-        RestAssured.baseURI = "https://restful-booker.herokuapp.com/";
+        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
     }
 
     @BeforeEach

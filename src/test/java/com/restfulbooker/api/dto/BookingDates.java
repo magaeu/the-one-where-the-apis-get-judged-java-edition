@@ -1,19 +1,21 @@
 package com.restfulbooker.api.dto;
 
-import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
+@Setter
+@ToString
 @AllArgsConstructor
 public class BookingDates {
     @JsonProperty("checkin")
-    private Date checkIn;
+    private String checkIn;
     @JsonProperty("checkout")
-    private Date checkOut;
+    private String checkOut;
 
 }

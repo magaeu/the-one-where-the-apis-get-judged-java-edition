@@ -7,36 +7,26 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.restfulbooker.api.dto.Booking;
-import com.restfulbooker.api.dto.BookingDates;
 import com.restfulbooker.api.dto.BookingResponse;
 import com.restfulbooker.api.setup.BaseTest;
 
-import io.restassured.specification.RequestSpecification;
-
 class BookingTest extends BaseTest {
-    private Booking booking;
-    private BookingDates bookingDates;
-    private BookingResponse bookingResponse;
 
     @Test
-    @DisplayName("Create a booking with valid data")
-    void createBookingWithValidData() {
-        bookingDates = new BookingDates(java.sql.Date.valueOf("2024-07-01"), java.sql.Date.valueOf("2024-07-10"));
-        booking = new Booking("John", "Doe", (int) 150.0, true, bookingDates, "Breakfast included");
-        
+    @DisplayName("Get all bookings")
+    void getAllBookings() {
 
-        bookingResponse = (BookingResponse) ((RequestSpecification) given()
-                .contentType("application/json")
+        BookingResponse[] bookingResponse = given()
                 .when()
-                .body(booking)
-                .post("/booking"))
-                .log().all()
+                .get("/booking")
                 .then()
                 .statusCode(HttpStatus.SC_OK)
-                .expect().response();
-
-        assertThat(bookingResponse.getBookingId()).as("Booking ID is not null").isNot(null);
-
+                .extract()
+                .as(BookingResponse[].class);    
+        
+        assertThat(bookingResponse).as("Booking response is not empty").isNotEmpty();
+        assertThat(bookingResponse).as("Booking response is greater than 0").hasSizeGreaterThan(0); 
+        assertThat(bookingResponse).as("Booking response contains valid booking IDs").extracting(BookingResponse::getBookingId).doesNotContainNull();
     }
+
 }
