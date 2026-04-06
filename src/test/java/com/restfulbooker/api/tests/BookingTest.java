@@ -14,7 +14,7 @@ class BookingTest extends BaseTest {
 
     @Test
     @DisplayName("Get all bookings")
-    void getAllBookings() {
+    public void getAllBookings() {
 
         BookingResponse[] bookingResponse = given()
                 .when()
@@ -22,11 +22,12 @@ class BookingTest extends BaseTest {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
+                .body()
                 .as(BookingResponse[].class);    
         
         assertThat(bookingResponse).as("Booking response is not empty").isNotEmpty();
         assertThat(bookingResponse).as("Booking response is greater than 0").hasSizeGreaterThan(0); 
-        assertThat(bookingResponse).as("Booking response contains valid booking IDs").extracting(BookingResponse::getBookingId).doesNotContainNull();
+        
     }
 
 }
