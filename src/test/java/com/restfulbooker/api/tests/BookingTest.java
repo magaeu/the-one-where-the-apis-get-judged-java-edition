@@ -7,8 +7,6 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.restfulbooker.api.dto.Booking;
-import com.restfulbooker.api.dto.BookingDates;
 import com.restfulbooker.api.dto.BookingId;
 import com.restfulbooker.api.dto.BookingResponse;
 import com.restfulbooker.api.setup.BaseTest;
@@ -28,9 +26,10 @@ class BookingTest extends BaseTest {
                 .extract()
                 .body()
                 .as(BookingId[].class);    
-        
+
         assertThat(bookingResponse).as("Booking response is not null").isNotNull();
         assertThat(bookingResponse.length).as("Booking response is not empty").isGreaterThan(0);
+        // assertThat(bookingResponse).extracting(BookingId::getBookingId).as("Booking id is a match").isEqualTo(1);
         
     }
 
@@ -39,6 +38,7 @@ class BookingTest extends BaseTest {
     public void getBookingById() {
 
         BookingResponse bookingResponse = given()
+                .spec(getReq())
                 .when()
                 .get("/booking/1")
                 .then()

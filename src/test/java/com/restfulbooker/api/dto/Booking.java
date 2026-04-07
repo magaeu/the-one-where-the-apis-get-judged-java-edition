@@ -27,5 +27,5 @@ public class Booking {
     private BookingDates bookingDates;
     @JsonProperty("additionalneeds")
     private String additionalNeeds;
-    
+
 }
