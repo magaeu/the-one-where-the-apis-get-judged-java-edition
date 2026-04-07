@@ -1,16 +1,12 @@
 package com.restfulbooker.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@Setter
 public class BookingCreatedResponse {
 
-    @JsonProperty("bookingid")
-    private int bookingId;
+    private BookingId bookingid;
     private Booking booking;
 }
