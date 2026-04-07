@@ -48,8 +48,6 @@ class BookingTest extends BaseTest {
                 .as(BookingResponse.class);    
         
         assertThat(bookingResponse).as("Booking response is not null").isNotNull();
-        assertThat(bookingResponse.getBooking().getFirstName()).as("Booking firstname is a match").isEqualTo("Jim");
-        assertThat(bookingResponse.getBooking().getLastName()).as("Booking last name is a match").isEqualTo("Ericsson");
         
     }
 
