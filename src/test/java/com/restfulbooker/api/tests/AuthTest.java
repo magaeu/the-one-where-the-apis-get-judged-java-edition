@@ -1,6 +1,7 @@
 package com.restfulbooker.api.tests;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.http.HttpStatus;
@@ -19,10 +20,10 @@ public class AuthTest extends BaseTest {
     @DisplayName("Generate auth token")
     public void generateAuthToken() {
 
-        Credentials credentials = new Credentials(  
-                "admin",
-                "password123"
-        );
+        Credentials credentials = Credentials.builder()
+                .username("admin")
+                .password("password123")
+                .build();
 
         Token responseToken = given()
                 .spec(getReq())
@@ -30,12 +31,15 @@ public class AuthTest extends BaseTest {
                 .body(credentials)
                 .post("/auth")
                 .then()
+                .body(matchesJsonSchemaInClasspath("schemas/authTokenSchema.json"))
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .body()
                 .as(Token.class);
 
         assertThat(responseToken).as("Token response is not null").isNotNull();
+        assertThat(responseToken.token()).as("Token is a string").isInstanceOf(String.class);
+        assertThat(responseToken.token()).as("Token value is not empty").isNotEmpty();
     
     }
 
@@ -43,10 +47,10 @@ public class AuthTest extends BaseTest {
     @DisplayName("Generate auth token with invalid credentials")
     public void generateAuthTokenWithInvalidCredentials() {
 
-        Credentials invalidCredentials = new Credentials(  
-                "invalidUser",
-                "invalidPass"
-        );
+        Credentials invalidCredentials = Credentials.builder()
+                .username("invalidUser")
+                .password("invalidPass")
+                .build();
 
         Response response = given()
                 .spec(getReq())
@@ -60,7 +64,7 @@ public class AuthTest extends BaseTest {
 
         String errorMessage = response.jsonPath().getString("reason");
         assertThat(errorMessage).as("Error message is 'Bad credentials'").isEqualTo("Bad credentials");
-        
+
     }
 
 }

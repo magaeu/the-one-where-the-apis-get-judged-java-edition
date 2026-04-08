@@ -34,6 +34,7 @@ dependencies {
             "org.projectlombok:lombok:1.18.42",
             "tools.jackson.core:jackson-core:3.1.0"
     )
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 }
 
 testing {
