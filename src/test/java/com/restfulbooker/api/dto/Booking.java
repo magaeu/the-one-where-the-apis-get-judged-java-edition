@@ -2,16 +2,14 @@ package com.restfulbooker.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Builder;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@ToString
 @Builder
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Booking {
 

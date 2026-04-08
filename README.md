@@ -48,6 +48,7 @@ This will download dependencies, compile the test sources, and execute the JUnit
 - Validate schema response
 - Use builder for request and response
 - Use given - when - then structure
+- Parametized tests
 
 ## Notes
 

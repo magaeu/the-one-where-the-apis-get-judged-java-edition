@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import com.restfulbooker.api.dto.Credentials;
 import com.restfulbooker.api.dto.Token;
-import com.restfulbooker.api.setup.BaseTest;
+import com.restfulbooker.api.setup.BaseAPI;
 
 import io.restassured.response.Response;
 
-public class AuthTest extends BaseTest {
+public class AuthTest extends BaseAPI {
 
     @Test
     @DisplayName("Generate auth token")
@@ -38,7 +38,6 @@ public class AuthTest extends BaseTest {
                 .as(Token.class);
 
         assertThat(responseToken).as("Token response is not null").isNotNull();
-        assertThat(responseToken.token()).as("Token is a string").isInstanceOf(String.class);
         assertThat(responseToken.token()).as("Token value is not empty").isNotEmpty();
     
     }

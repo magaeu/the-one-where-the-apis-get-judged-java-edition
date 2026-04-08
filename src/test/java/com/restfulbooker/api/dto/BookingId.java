@@ -2,15 +2,17 @@ package com.restfulbooker.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import groovy.transform.ToString;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.extern.jackson.Jacksonized;
 
+@Jacksonized
+@Accessors(fluent = true)
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
+@NoArgsConstructor
 public class BookingId {
     
     @JsonProperty("bookingid")

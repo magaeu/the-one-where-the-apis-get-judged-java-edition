@@ -16,7 +16,10 @@ version = '1.0-SNAPSHOT'
 ext {
     assertJVersion = "3.27.1"
     restAssuredVersion = "5.5.6"
-    junitVersion = '6.0.1'
+    junitVersion = "6.0.1"
+    junitDataProviderVersion = "2.12"
+    lombokVersion = "1.18.42"
+    jacksonVersion = "3.1.0"
 }
 
 repositories {
@@ -31,10 +34,11 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-params:${junitVersion}",
             "org.assertj:assertj-core:${assertJVersion}",
-            "org.projectlombok:lombok:1.18.42",
-            "tools.jackson.core:jackson-core:3.1.0"
+            "org.projectlombok:lombok:${lombokVersion}",
+            "tools.jackson.core:jackson-core:${jacksonVersion}",
+            "com.tngtech.junit.dataprovider:junit4-dataprovider:${junitDataProviderVersion}"
     )
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
 testing {
