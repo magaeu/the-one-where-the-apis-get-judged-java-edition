@@ -27,8 +27,8 @@ public class AuthTest extends BaseAPI {
 
         Token responseToken = given()
                 .spec(getReq())
-                .when()
                 .body(credentials)
+                .when()
                 .post("/auth")
                 .then()
                 .body(matchesJsonSchemaInClasspath("schemas/authTokenSchema.json"))
@@ -53,8 +53,8 @@ public class AuthTest extends BaseAPI {
 
         Response response = given()
                 .spec(getReq())
-                .when()
                 .body(invalidCredentials)
+                .when()
                 .post("/auth")
                 .then()
                 .statusCode(HttpStatus.SC_OK)
