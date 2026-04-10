@@ -8,8 +8,8 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.restfulbooker.api.dto.Credentials;
-import com.restfulbooker.api.dto.Token;
+import com.restfulbooker.api.dto.AuthPayload;
+import com.restfulbooker.api.dto.AuthResponse;
 import com.restfulbooker.api.setup.BaseAPI;
 
 import io.restassured.response.Response;
@@ -20,12 +20,12 @@ public class AuthTest extends BaseAPI {
     @DisplayName("Generate auth token")
     public void generateAuthToken() {
 
-        Credentials credentials = Credentials.builder()
+        AuthPayload credentials = AuthPayload.builder()
                 .username("admin")
                 .password("password123")
                 .build();
 
-        Token responseToken = given()
+        AuthResponse responseToken = given()
                 .spec(getReq())
                 .body(credentials)
                 .when()
@@ -35,7 +35,7 @@ public class AuthTest extends BaseAPI {
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .body()
-                .as(Token.class);
+                .as(AuthResponse.class);
 
         assertThat(responseToken).as("Token response is not null").isNotNull();
         assertThat(responseToken.token()).as("Token value is not empty").isNotEmpty();
@@ -46,7 +46,7 @@ public class AuthTest extends BaseAPI {
     @DisplayName("Generate auth token with invalid credentials")
     public void generateAuthTokenWithInvalidCredentials() {
 
-        Credentials invalidCredentials = Credentials.builder()
+        AuthPayload invalidCredentials = AuthPayload.builder()
                 .username("invalidUser")
                 .password("invalidPass")
                 .build();

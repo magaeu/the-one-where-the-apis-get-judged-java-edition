@@ -11,7 +11,7 @@ import lombok.Builder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Credentials {
+public class AuthPayload {
 
     @JsonProperty("username")
     private String username;

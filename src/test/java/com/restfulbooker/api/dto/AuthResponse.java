@@ -13,7 +13,7 @@ import lombok.extern.jackson.Jacksonized;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Token {
+public class AuthResponse {
 
     @JsonProperty("token")
     private String token;
